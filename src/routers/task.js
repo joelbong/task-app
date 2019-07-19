@@ -5,6 +5,8 @@ const auth = require('../middelware/auth')
 
 const router = new express.Router()
 
+
+// POST
 router.post('/tasks', auth, async (req, res) => {
     const task = new Task({
         ...req.body,
@@ -19,6 +21,7 @@ router.post('/tasks', auth, async (req, res) => {
     }
 })
 
+// GET
 router.get('/tasks', auth, async (req, res) => {
     const match = {}
     const sort = {}
@@ -62,6 +65,8 @@ router.get('/tasks/:id', auth, async (req, res) => {
     }
 })
 
+
+// PATCH
 router.patch('/tasks/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['description', 'completed']
@@ -88,6 +93,8 @@ router.patch('/tasks/:id', auth, async (req, res) => {
     }
 })
 
+
+// DELETE
 router.delete('/tasks/:id', auth, async (req, res) => {
     const _id = req.params.id
     try {
